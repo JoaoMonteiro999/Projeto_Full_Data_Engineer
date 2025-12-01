@@ -1,0 +1,55 @@
+# Credentials and sensitive keys
+*.json
+!package.json
+!tsconfig.json
+credentials/
+segredos/
+*.key
+*.pem
+*.p12
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Airflow
+logs/
+airflow.db
+airflow.cfg
+airflow-webserver.pid
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Temporary data
+tmp/
+temp/
+*.tmp
+*.log
