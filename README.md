@@ -9,62 +9,40 @@ Automates downloading, cleaning, and uploading CSV files to Google Cloud Storage
 - `data/` — sample data
 - `credentials/` — store keys (gitignored)
 
-## Main usage
-1. Install dependencies:
-   ```zsh
-   pip3 install -r requirements.txt
-   ```
-2. Authenticate with GCP:
-   - Local: `gcloud auth application-default login`
-   - Production: export service account key
-     ```zsh
-     export GOOGLE_APPLICATION_CREDENTIALS="$PWD/credentials/csv-ingest-sa-key.json"
-     ```
-3. Run ingestion:
-   ```zsh
-   python3 scripts/download_and_upload_csv.py \
-     --csv-url "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv" \
-     --gcs-bucket "projeto-full-data-engineer-bucket" \
-     --gcs-path "raw/titanic.csv"
-   ```
+## Quick Start
 
-The file is cleaned (empty rows removed) and uploaded to the GCS bucket.
+### 1️⃣ Initial Setup (after cloning)
 
-## Security
-- Never commit JSON key files.
-- The `credentials/` folder is protected by `.gitignore`.
-# Full Data Engineer Project
+```zsh
+# Install dependencies
+pip3 install -r requirements.txt
 
-Automates downloading, cleaning, and uploading CSV files to Google Cloud Storage.
+# Set up environment variables (automatic)
+python setup_env.py
 
-## Structure
-- `scripts/` — Python scripts for data ingestion
-- `infra/` — infrastructure and gcloud commands
-- `sql/` — SQL transformations
-- `data/` — sample data
-- `credentials/` — store keys (gitignored)
+# Authenticate with GCP
+gcloud auth application-default login
+```
 
-## Main usage
-1. Install dependencies:
-   ```zsh
-   pip3 install -r requirements.txt
-   ```
-2. Authenticate with GCP:
-   - Local: `gcloud auth application-default login`
-   - Production: export service account key
-     ```zsh
-     export GOOGLE_APPLICATION_CREDENTIALS="$PWD/credentials/csv-ingest-sa-key.json"
-     ```
-3. Run ingestion:
-   ```zsh
-   python3 scripts/download_and_upload_csv.py \
-     --csv-url "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv" \
-     --gcs-bucket "projeto-full-data-engineer-bucket" \
-     --gcs-path "raw/titanic.csv"
-   ```
+### 2️⃣ Run
 
-The file is cleaned (empty rows removed) and uploaded to the GCS bucket.
+```zsh
+python3 scripts/download_and_upload_csv.py
+```
+
+## Environment Variables
+
+The variables are loaded from `.env` (protected by `.gitignore`):
+
+- `CSV_URL` — CSV URL to download
+- `GCS_BUCKET` — GCS bucket name
+- `GCS_PATH` — Path in the bucket (e.g., `raw/data.csv`)
+
+**First time:** Run `python setup_env.py` to create `.env` from `.env.example`.
 
 ## Security
 - Never commit JSON key files.
 - The `credentials/` folder is protected by `.gitignore`.
+- `.env` contains credentials — never commit!
+
+

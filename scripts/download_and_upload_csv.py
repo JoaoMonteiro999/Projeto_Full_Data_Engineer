@@ -3,10 +3,17 @@ import sys
 import argparse
 import tempfile
 from typing import Optional
+from pathlib import Path
 
 import requests
 import pandas as pd
 from google.cloud import storage
+from dotenv import load_dotenv
+
+
+# Load variables from .env file
+env_path = Path(__file__).parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
 
 def download_csv(csv_url: str) -> str:
@@ -47,20 +54,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--csv-url",
         dest="csv_url",
-        default=os.getenv("CSV_URL", "https://example.com/data.csv"),
-        help="CSV URL to download (env: CSV_URL)",
+        default=os.getenv("CSV_URL"),
+        help="CSV URL to download (env: CSV_URL, or defined in .env)",
     )
     parser.add_argument(
         "--gcs-bucket",
         dest="gcs_bucket",
-        default=os.getenv("GCS_BUCKET", "meu-bucket"),
-        help="Target GCS bucket (env: GCS_BUCKET)",
+        default=os.getenv("GCS_BUCKET"),
+        help="Target GCS bucket (env: GCS_BUCKET, ou definido em .env)",
     )
     parser.add_argument(
         "--gcs-path",
         dest="gcs_path",
-        default=os.getenv("GCS_PATH", "raw/data.csv"),
-        help="Target object path in bucket (env: GCS_PATH)",
+        default=os.getenv("GCS_PATH"),
+        help="Target object path in bucket (env: GCS_PATH, ou definido em .env)",
     )
     return parser.parse_args()
 
